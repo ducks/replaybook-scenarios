@@ -1,5 +1,5 @@
 FROM python:3.12-alpine
-RUN apk add --no-cache iproute2 tmux
+RUN apk add --no-cache iproute2
 WORKDIR /app
 COPY app.py .
 CMD ["python", "app.py"]

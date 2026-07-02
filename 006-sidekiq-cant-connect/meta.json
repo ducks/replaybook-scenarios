@@ -5,10 +5,8 @@
   "difficulty": 2,
   "tags": ["sidekiq", "redis", "background-jobs", "ruby"],
   "hints": [
-    "Sidekiq connects to Redis - check if that connection is working",
-    "Look at the Sidekiq logs, not the Rails logs"
+    "Sidekiq's logs say exactly why it can't start - go look",
+    "Compare the password in Sidekiq's REDIS_URL with the one redis-server was started with. One of them has to change."
   ],
-  "success_condition": "exit_zero",
-  "success_target": "",
-  "shell_service": "sidekiq"
+  "success_condition": "exit_zero"
 }

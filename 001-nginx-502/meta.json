@@ -10,5 +10,8 @@
   ],
   "success_condition": "http_200",
   "success_target": "http://localhost:8080/health",
-  "shell_service": "nginx"
+  "break": [
+    { "cp": { "service": "nginx", "src": "nginx-broken.conf", "dest": "/etc/nginx/nginx.conf" } },
+    { "exec": { "service": "nginx", "cmd": ["nginx", "-s", "reload"] } }
+  ]
 }

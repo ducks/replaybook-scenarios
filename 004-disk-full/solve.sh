@@ -3,6 +3,5 @@ set -e
 
 SCENARIO_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Add 40% packet loss on the app container's eth0
 docker compose -f "$SCENARIO_DIR/docker-compose.yml" exec -T app \
-  tc qdisc add dev eth0 root netem loss 40%
+  rm -f /tmp/app-debug.core

@@ -3,7 +3,7 @@ services:
     build: .
     ports:
       - "8080:8080"
-    environment:
-      CACHE_MB: "90"
+    # memswap == mem so the cache can't quietly spill into swap and dodge
+    # the OOM killer on hosts that have swap enabled
     mem_limit: "64m"
-    restart: on-failure
+    memswap_limit: "64m"
