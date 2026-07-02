@@ -1,0 +1,12 @@
+{
+  "id": "002-postgres-rejecting-connections",
+  "title": "Postgres Rejecting Connections",
+  "page": "app is throwing 'FATAL: pg_hba.conf rejects connection' on every request. started this morning. no deploys. the db host itself looks up.",
+  "difficulty": 2,
+  "tags": ["postgres", "pg_hba", "auth", "database"],
+  "hints": [
+    "The error message names the file that's rejecting you - go read it",
+    "pg_hba.conf rules match top to bottom. After fixing it, reload: psql -U postgres -c 'SELECT pg_reload_conf()'"
+  ],
+  "success_condition": "exit_zero"
+}

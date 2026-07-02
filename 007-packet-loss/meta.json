@@ -9,6 +9,5 @@
     "Check if the network interface itself has any rules applied to it"
   ],
   "success_condition": "http_200",
-  "success_target": "http://localhost:8080/health",
-  "shell_service": "app"
+  "success_target": "http://localhost:8080/health"
 }
