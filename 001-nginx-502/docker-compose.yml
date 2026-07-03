@@ -1,7 +1,9 @@
 services:
   app:
     image: python:3.12-alpine
-    command: python -m http.server 3000
+    # http.server serves files, so /health needs to actually exist -
+    # without it every request 404s and the scenario can never go green
+    command: sh -c "mkdir -p /srv/www && echo ok > /srv/www/health && cd /srv/www && python -m http.server 3000"
     networks:
       - internal
 
