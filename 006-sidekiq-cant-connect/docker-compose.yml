@@ -6,6 +6,6 @@ services:
   sidekiq:
     build: .
     environment:
-      REDIS_URL: redis://:wrongpassword@redis:6379/0
+      REDIS_URL: redis://:correctpassword@redis:6379/0
     depends_on:
       - redis

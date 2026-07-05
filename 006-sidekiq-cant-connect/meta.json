@@ -4,9 +4,38 @@
   "page": "emails have stopped sending. password reset requests are piling up. the app is up and responding but nothing is happening in the background. started about 20 mins ago, no deploys.",
   "difficulty": 2,
   "tags": ["sidekiq", "redis", "background-jobs", "ruby"],
-  "hints": [
-    "Sidekiq's logs say exactly why it can't start - go look",
-    "Compare the password in Sidekiq's REDIS_URL with the one redis-server was started with. One of them has to change."
-  ],
-  "success_condition": "exit_zero"
+  "success_condition": "exit_zero",
+  "faults": [
+    {
+      "name": "auth-drift",
+      "break": [
+        { "exec": { "service": "redis", "cmd": ["sh", "-c", "redis-cli -a correctpassword config set requirepass hunter2 > /dev/null 2>&1"] } },
+        { "restart": { "service": "sidekiq" } }
+      ],
+      "hints": [
+        "Sidekiq's logs say the redis password is wrong - but its REDIS_URL matches the password redis-server was started with. What is redis requiring right now?",
+        "CONFIG SET changes aren't persisted. What happens to drifted runtime config when redis restarts?"
+      ]
+    },
+    {
+      "name": "redis-oom",
+      "break": [
+        { "exec": { "service": "redis", "cmd": ["sh", "-c", "redis-cli -a correctpassword config set maxmemory 1 > /dev/null 2>&1"] } }
+      ],
+      "hints": [
+        "Sidekiq can read from redis but every write fails - read the exact error in the logs",
+        "redis-cli -a <password> config get maxmemory"
+      ],
+      "solve": "solve-oom.sh"
+    },
+    {
+      "name": "redis-stopped",
+      "script": "break-stopped.sh",
+      "hints": [
+        "Is redis even running? Check all the containers, not just sidekiq's",
+        "A stopped container isn't gone - docker ps -a, then start it again"
+      ],
+      "solve": "solve-stopped.sh"
+    }
+  ]
 }
