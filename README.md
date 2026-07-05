@@ -52,5 +52,12 @@ the check recovers. CI runs this for every scenario on every push.
   location-independent (resolve paths from the script's own directory).
 - `solve.sh` should mirror the fix a player is expected to find - it doubles
   as documentation of the intended solution path.
+- **Prefer fault variants over new lookalike scenarios.** A `faults: [...]`
+  list in meta.json gives one symptom several root causes; `replaybook run`
+  draws one blind, so repeat plays stay diagnostic. See
+  `006-sidekiq-cant-connect` (auth drift vs redis OOM vs stopped redis) and
+  the [engine README](https://github.com/ducks/replaybook#fault-variants-one-symptom-several-root-causes)
+  for the format. Keep a compat `break.sh`/`solve.sh` for one fault so
+  older engines still play the scenario.
 
 See any existing scenario for a working example.

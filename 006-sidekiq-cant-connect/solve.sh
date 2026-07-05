@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+# Solve for the auth-drift fault (and the compat break.sh): restarting
+# redis discards the un-persisted CONFIG SET and restores the password
+# from its command line.
 set -e
 
 SCENARIO_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Align the Redis password with the one sidekiq is configured to use
-docker compose -f "$SCENARIO_DIR/docker-compose.yml" exec -T redis \
-  redis-cli -a correctpassword config set requirepass wrongpassword > /dev/null 2>&1
+docker compose -f "$SCENARIO_DIR/docker-compose.yml" restart redis
