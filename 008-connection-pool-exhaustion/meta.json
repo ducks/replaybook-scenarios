@@ -1,0 +1,16 @@
+{
+  "id": "008-connection-pool-exhaustion",
+  "title": "Checkout Is Down",
+  "page": "checkout is 500ing on every request. the db dashboard says postgres is up and healthy. no deploys today. it got worse right after the nightly batch window started.",
+  "difficulty": 3,
+  "tags": ["postgres", "connections", "cascade", "database"],
+  "hints": [
+    "The app can't get a db connection - but is postgres down, or just full? Read the exact error the app is logging.",
+    "Ask postgres who is using the pool: SELECT application_name, count(*) FROM pg_stat_activity GROUP BY 1. Then find where they live and stop them."
+  ],
+  "success_condition": "http_200",
+  "success_target": "http://localhost:8080/health",
+  "break": [
+    { "exec": { "service": "batch", "cmd": ["sh", "-c", "nohup python /app/leak.py > /tmp/leak.log 2>&1 &"] } }
+  ]
+}

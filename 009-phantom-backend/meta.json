@@ -1,0 +1,13 @@
+{
+  "id": "009-phantom-backend",
+  "title": "Backend Not Receiving Traffic",
+  "page": "app is erroring on every backend call since this morning's network maintenance. the backend team swears their service is healthy - and their logs agree: no traffic is arriving at all.",
+  "difficulty": 3,
+  "tags": ["dns", "networking", "cascade", "red-herring"],
+  "hints": [
+    "The backend really is healthy. So if the app's requests are failing, where are they actually going? Trace one from inside the app container.",
+    "How does the app resolve the name 'backend'? /etc/hosts wins over DNS - check it inside the app container."
+  ],
+  "success_condition": "http_200",
+  "success_target": "http://localhost:8080/health"
+}

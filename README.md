@@ -19,6 +19,8 @@ replaybook add ducks/replaybook-scenarios
 | 005-oom-kill | App Keeps Dying | 2 |
 | 006-sidekiq-cant-connect | Jobs Not Processing | 2 |
 | 007-packet-loss | Intermittent Request Failures | 3 |
+| 008-connection-pool-exhaustion | Checkout Is Down | 3 |
+| 009-phantom-backend | Backend Not Receiving Traffic | 3 |
 
 ## Contributing
 

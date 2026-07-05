@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+
+  # Decommissioned last quarter, never actually torn down.
+  backend-canary:
+    build:
+      context: .
+      dockerfile: Dockerfile.canary
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
