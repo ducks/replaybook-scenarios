@@ -13,7 +13,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
 
       - name: Install replaybook
-        run: cargo install replaybook --version 20260704.0.0 --locked
+        run: cargo install replaybook --version 20260705.0.1 --locked
 
       - name: Test every scenario
         run: |
