@@ -1,0 +1,5 @@
+FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY checkout-response.txt /srv/checkout/checkout
+COPY legacy-response.txt /srv/legacy/checkout

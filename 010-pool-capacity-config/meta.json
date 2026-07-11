@@ -1,0 +1,13 @@
+{
+  "id": "010-pool-capacity-config",
+  "title": "Checkout 503s After a Clean Deploy",
+  "page": "checkout is returning 503s for every request. app deploy finished cleanly and the container is still up. db metrics look normal, but customers cannot complete orders.",
+  "difficulty": 2,
+  "tags": ["checkout", "config", "database", "connection-pool"],
+  "hints": [
+    "The process is alive - check what it says when it starts",
+    "Look for runtime config that controls database pool capacity"
+  ],
+  "success_condition": "exit_zero",
+  "success_target": ""
+}

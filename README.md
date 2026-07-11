@@ -21,6 +21,8 @@ replaybook add ducks/replaybook-scenarios
 | 007-packet-loss | Intermittent Request Failures | 3 |
 | 008-connection-pool-exhaustion | Checkout Is Down | 3 |
 | 009-phantom-backend | Backend Not Receiving Traffic | 3 |
+| 010-pool-capacity-config | Checkout 503s After a Clean Deploy | 2 |
+| 011-retired-backend-routing | Zero Traffic on the New Backend | 2 |
 
 ## Contributing
 

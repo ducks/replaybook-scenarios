@@ -1,0 +1,13 @@
+{
+  "id": "011-retired-backend-routing",
+  "title": "Zero Traffic on the New Backend",
+  "page": "checkout deploy looks healthy, but the new checkout backend has zero traffic and orders are still going through the retired path. edge is returning 200s, so this is easy to miss.",
+  "difficulty": 2,
+  "tags": ["nginx", "routing", "backend", "checkout"],
+  "hints": [
+    "A 200 from the edge does not prove the right service handled the request",
+    "Compare the proxy config with the backend names in compose"
+  ],
+  "success_condition": "exit_zero",
+  "success_target": ""
+}
